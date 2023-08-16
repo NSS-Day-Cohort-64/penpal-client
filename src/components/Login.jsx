@@ -55,10 +55,10 @@ export const Login = () => {
                             onChange={evt => setPassword(evt.target.value)}
                             className="form-control"
                             placeholder="Password"
-                            required />
+                             />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
+                        <button type="submit" className="button p-3 rounded-md bg-blue-800 text-blue-100">
                             Sign in
                         </button>
                     </fieldset>
@@ -66,10 +66,10 @@ export const Login = () => {
             </section>
             <div className="loginLinks">
                 <section className="link--register">
-                    <Link to="/register">Not a member yet?</Link>
+                    <Link className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" to="/register">Not a member yet?</Link>
                 </section>
                 <section className="link--register">
-                    <Link to="/registeremployee">Register new employee</Link>
+                    <Link className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" to="/registeremployee">Register new employee</Link>
                 </section>
             </div>
         </main>
