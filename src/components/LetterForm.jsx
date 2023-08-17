@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 
-export const LetterForm = () => {
-    const [users, changeUsers] = useState([])
-    const [topics, changeTopics] = useState([])
-    const [letter, updateLetterProps] = useState({
+export const LetterForm = ({ setter, fetchLetters }) => {
+    const initialLetterState = {
         body: "",
         recipient: 0,
         topic: 0
-    })
+    }
+
+    const [users, changeUsers] = useState([])
+    const [topics, changeTopics] = useState([])
+    const [letter, updateLetterProps] = useState(initialLetterState)
 
     const fetchUsers = async () => {
         const response = await fetch("http://localhost:8000/recipients", {
@@ -27,9 +29,8 @@ export const LetterForm = () => {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("penpal_token")).token}`
             }
         })
-        const userArray = await response.json()
-
-        changeTopics(userArray)
+        const topicArray = await response.json()
+        changeTopics(topicArray)
     }
 
     useEffect(() => {
@@ -48,7 +49,12 @@ export const LetterForm = () => {
             },
             body: JSON.stringify(letter)
         })
-        const userArray = await response.json()
+        const newLetterObject = await response.json()
+
+        fetchLetters()
+        updateLetterProps(initialLetterState)
+
+        window.alert("Your mail was successfully sent!! 🧨")
 
     }
 

@@ -1,23 +1,10 @@
 import { useEffect, useState } from "react"
 
-export const LetterList = () => {
-    const [letters, changeLetters] = useState([])
-
-    const fetchLetters = async () => {
-        const response = await fetch("http://localhost:8000/letters", {
-            method: "GET",
-            headers: {
-                "Authorization": `Token ${JSON.parse(localStorage.getItem("penpal_token")).token}`
-            }
-        })
-        const letters = await response.json()
-
-        changeLetters(letters)
-    }
-
+export const LetterList = ({ letters, fetchLetters }) => {
     useEffect(() => {
         fetchLetters()
     }, [])
+
 
     const displayLetters = () => {
         if (letters.length) {
